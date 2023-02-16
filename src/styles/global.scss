@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+
+html,
+body,
+#root,
+#App {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.navbar {
+    height: 40px;
+}
+
+.input {
+    width: 100%;
+}
