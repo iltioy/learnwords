@@ -7,7 +7,12 @@ interface Props {
     className: string;
     placeholder: string;
     selectedItem: string | null;
-    setSelectedItem: React.Dispatch<React.SetStateAction<string | null>>;
+    setSelectedItem:
+        | React.Dispatch<React.SetStateAction<string | null>>
+        | React.Dispatch<React.SetStateAction<string>>;
+    bg?: string;
+    height?: string;
+    styles?: string;
 }
 
 const Dropdown: React.FC<Props> = ({
@@ -15,6 +20,9 @@ const Dropdown: React.FC<Props> = ({
     placeholder,
     selectedItem,
     setSelectedItem,
+    bg,
+    height,
+    styles,
 }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     // const [selectedItem, setSelectedItem] = useState<string>(placeholder);
@@ -39,7 +47,12 @@ const Dropdown: React.FC<Props> = ({
     });
 
     return (
-        <StyledDropdown className={className} ref={dropdownRef}>
+        <StyledDropdown
+            className={`${className} dropdown`}
+            ref={dropdownRef}
+            bg={bg}
+            height={height}
+        >
             <div className="selectedItem" onClick={() => setIsOpen(!isOpen)}>
                 {selectedItem ? selectedItem : placeholder}
             </div>

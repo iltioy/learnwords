@@ -1,93 +1,215 @@
-import "./edit.css";
-import Button from "../components/Button";
+import "./styles/edit.css";
+import { useEffect, useMemo, useState } from "react";
 import Input from "../components/Input";
-import { useState } from "react";
+import { RxCross1 } from "react-icons/rx";
+import { AiOutlineEdit, AiOutlinePlus } from "react-icons/ai";
+import { useInView } from "react-intersection-observer";
+import { Word } from "../type";
 import Dropdown from "../components/Dropdown";
 
 interface Props {
-    words: any;
-    setWords: React.Dispatch<any>;
+    words: Word[];
+    setWords: React.Dispatch<React.SetStateAction<Word[]>>;
+    editWord: (word: Word) => void;
+    createCategory: () => void;
 }
 
-const Edit: React.FC<Props> = ({ words, setWords }) => {
-    const [firstWord, setFirstWord] = useState<string>("");
-    const [secondWord, setSecondWord] = useState<string>("");
+const Edit: React.FC<Props> = ({
+    words,
+    setWords,
+    editWord,
+    createCategory,
+}) => {
+    const [search, setSeatch] = useState<string>("");
+    const [page, setPage] = useState<number>(1);
 
-    const [collection, setCoolection] = useState<string | null>(null);
-    const [repeat, setRepeat] = useState<string | null>(null);
-    const [language, setLanguage] = useState<string | null>(null);
+    // const [isSettingShowed, setIsSettingShowed] = useState<boolean>(false);
+    const [collection, setCollection] = useState<string | null>(null);
     const [difficulty, setDifficulty] = useState<string | null>(null);
+    const [language, setLanguage] = useState<string | null>(null);
+    const [repeat, setRepeat] = useState<boolean | null>(null);
 
-    const handeSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const filteredWords = useMemo(() => {
+        return words.filter((word: Word) => {
+            return (
+                (word.firstWord.toLowerCase().includes(search.toLowerCase()) ||
+                    word.secondWord
+                        .toLowerCase()
+                        .includes(search.toLowerCase())) &&
+                (word.options.collection === collection ||
+                    collection === null) &&
+                (word.options.difficulty === difficulty ||
+                    difficulty === null) &&
+                (word.options.language === language || language === null) &&
+                (word.options.repeat === repeat || repeat === null)
+            );
+        });
+    }, [words, search, collection, difficulty, language, repeat]);
 
-        if (firstWord.trim() !== "" && secondWord.trim() !== "") {
-            setWords((prevState: any) => {
-                if (!prevState) {
-                    return [{ firstWord, secondWord }];
-                }
-                return [...prevState!, { firstWord, secondWord }];
-            });
+    const { ref, inView } = useInView();
 
-            localStorage.setItem("words", JSON.stringify(words));
-            setSecondWord("");
-            setFirstWord("");
-        }
+    const handleDelete = (word: Word) => {
+        setWords((prevState: any) => {
+            return prevState.filter((el: Word) => el !== word);
+        });
     };
 
+    useEffect(() => {
+        if (inView && words.length > page * 10) {
+            setPage((prevState) => prevState + 1);
+        }
+    }, [inView]);
+
     return (
-        <div className="editPage">
-            <form action="" onSubmit={(e) => handeSubmit(e)}>
-                <Input
-                    placeholder="Первое слово"
-                    value={firstWord}
-                    setValue={setFirstWord}
-                />
-                <Input
-                    placeholder="Второе слово"
-                    value={secondWord}
-                    setValue={setSecondWord}
-                />
-                <div style={{ marginTop: "15px" }}>
-                    <Button type="submit" width="120px">
-                        Сохранить
-                    </Button>
-                </div>
-            </form>
-
-            <div className="optionsDiv">
-                <div style={{ fontSize: "24px" }}>Добавить параметры</div>
-                <div className="options">
-                    <Dropdown
-                        className="option"
-                        placeholder="Коллекция"
-                        selectedItem={collection}
-                        setSelectedItem={setCoolection}
-                    />
-
-                    <div className="option">
-                        Интенсивное повторение{" "}
-                        <label htmlFor="" className="checkbox-google">
-                            <input type="checkbox" checked disabled />
-                            <span className="checbox-google-switch"></span>
-                        </label>
+        <>
+            <div className="editPage">
+                <div style={{ fontSize: "20px" }}>
+                    <div
+                        className="flex"
+                        style={{ justifyContent: "space-between" }}
+                    >
+                        <div>Поиск слов</div>
                     </div>
-
-                    <Dropdown
-                        className="option"
-                        placeholder="Язык"
-                        selectedItem={language}
-                        setSelectedItem={setLanguage}
-                    />
-                    <Dropdown
-                        className="option"
-                        placeholder="Сложность"
-                        selectedItem={difficulty}
-                        setSelectedItem={setDifficulty}
-                    />
+                    <Input setValue={setSeatch} value={search} forLabel="4" />
                 </div>
+                <div className="filtersHeader">Фильтры</div>
+                <div className="filters">
+                    <div className="filter flex column">
+                        <div className="filterHeader">Колекция:</div>
+                        <Dropdown
+                            className="filterOption"
+                            placeholder="Не выбрано"
+                            selectedItem={collection}
+                            setSelectedItem={setCollection}
+                            height="25px"
+                            bg="#e8e5e5"
+                        />
+                        <div
+                            className="filterAdd"
+                            onClick={() => createCategory()}
+                        >
+                            <AiOutlinePlus />
+                            создать новую
+                        </div>
+                    </div>
+                    <div className="filter flex column">
+                        <div className="filterHeader">Сложность:</div>
+                        <Dropdown
+                            className="filterOption"
+                            placeholder="Не выбрано"
+                            selectedItem={difficulty}
+                            setSelectedItem={setDifficulty}
+                            height="25px"
+                            bg="#e8e5e5"
+                        />
+                        <div
+                            className="filterAdd"
+                            onClick={() => createCategory()}
+                        >
+                            <AiOutlinePlus />
+                            создать новую
+                        </div>
+                    </div>
+                    <div className="filter flex column">
+                        <div className="filterHeader">Язык:</div>
+                        <Dropdown
+                            className="filterOption"
+                            placeholder="Не выбрано"
+                            selectedItem={language}
+                            setSelectedItem={setLanguage}
+                            height="25px"
+                            bg="#e8e5e5"
+                        />
+                        <div
+                            className="filterAdd"
+                            onClick={() => createCategory()}
+                        >
+                            <AiOutlinePlus />
+                            создать новую
+                        </div>
+                    </div>
+                    <div className="filter flex row">
+                        <div className="checkBoxFilter">
+                            <div className="filterHeader">Повторение:</div>
+                            <input
+                                className="checkBox"
+                                id="checkBox"
+                                type="checkbox"
+                                onChange={(e) =>
+                                    e.target.checked
+                                        ? setRepeat(e.target.checked)
+                                        : setRepeat(null)
+                                }
+                                checked={repeat ? true : false}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div className="titles">
+                    <div className="title">Слово</div>
+                    <div className="title">Перевод</div>
+                </div>
+                {useMemo(() => {
+                    return words ? (
+                        <div className="showedWords">
+                            {filteredWords
+                                .slice(0, 10 * page)
+                                .map((word: Word, index: number) => {
+                                    return (
+                                        <div
+                                            className={`words ${
+                                                index === 0 ? "firstWord" : ""
+                                            } ${
+                                                words.length === 1
+                                                    ? "onlyWord"
+                                                    : ""
+                                            }`}
+                                            key={index}
+                                        >
+                                            <div className="word">
+                                                {word.firstWord}
+                                            </div>
+                                            <div className="word">
+                                                {word.secondWord}
+                                            </div>
+                                            <div className="icons">
+                                                <div
+                                                    className="editIconDiv"
+                                                    onClick={() =>
+                                                        editWord(word)
+                                                    }
+                                                >
+                                                    <AiOutlineEdit className="editIcon" />
+                                                </div>
+                                                <div
+                                                    className="deleteIconDiv"
+                                                    onClick={() =>
+                                                        handleDelete(word)
+                                                    }
+                                                >
+                                                    <RxCross1 className="deleteIcon" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            <div ref={ref} className="viewRef"></div>
+                        </div>
+                    ) : (
+                        <div>Слова не найдены</div>
+                    );
+                }, [
+                    words,
+                    filteredWords,
+                    page,
+                    collection,
+                    difficulty,
+                    language,
+                    repeat,
+                ])}
             </div>
-        </div>
+        </>
     );
 };
 

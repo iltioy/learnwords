@@ -1,0 +1,51 @@
+.editModal {
+  position: fixed;
+  height: 400px;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  background-color: white;
+  z-index: 104;
+  border: 1px solid #bdbdbd;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.editModal .option {
+  width: 100%;
+  border: 1px solid #bdbdbd;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e7e7e7;
+  text-align: center;
+}
+.editModal .content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 300px;
+  height: 350px;
+}
+.editModal .ddLabel {
+  margin-bottom: 8px;
+}
+.editModal .saveButton {
+  margin-top: auto;
+}
+.editModal .checkBoxDiv {
+  display: flex;
+  align-items: center;
+}
+.editModal #checkBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  margin-top: 6px;
+}/*# sourceMappingURL=styles.css.map */

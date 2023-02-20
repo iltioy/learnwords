@@ -1,0 +1,130 @@
+.editPage {
+  display: flex;
+  flex-direction: column;
+}
+.editPage .titles {
+  display: grid;
+  grid-template-columns: 1fr 1fr 50px;
+  padding: 12px 5px 12px 16px;
+  margin: 20px 0;
+  box-shadow: 0px 0px 2px grey;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+.editPage .filtersHeader {
+  margin-top: 10px;
+  font-size: 20px;
+}
+.editPage .filters {
+  border: 1px solid grey;
+  margin-top: 5px;
+  border-radius: 5px;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 100px 100px;
+  row-gap: 30px;
+}
+@media (max-width: 1000px) {
+  .editPage .filters {
+    grid-template-columns: 1fr 1fr;
+    -moz-column-gap: 10px;
+         column-gap: 10px;
+  }
+}
+.editPage .filter {
+  width: 200px;
+  margin-left: 10px;
+}
+@media (max-width: 600px) {
+  .editPage .filter {
+    width: 170px;
+  }
+}
+.editPage .filter .filterHeader {
+  font-size: 25px;
+  margin-bottom: 7px;
+}
+@media (max-width: 600px) {
+  .editPage .filter .filterHeader {
+    font-size: 18px;
+  }
+}
+.editPage .filter .filterOption {
+  border: 1px solid grey;
+  display: flex;
+  text-align: center;
+  height: 30px;
+  border-radius: 5px;
+}
+.editPage .filter .filterAdd {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: blue;
+  margin-top: 4px;
+}
+.editPage .filter .filterAdd:hover {
+  text-decoration: underline;
+}
+.editPage .filter .checkBoxFilter {
+  display: flex;
+  max-height: 100px;
+  margin-bottom: 0;
+  justify-content: center;
+  align-items: flex-start;
+}
+.editPage .filter .checkBoxFilter .checkBox {
+  height: 20px;
+  margin-top: 9px;
+}
+@media (max-width: 600px) {
+  .editPage .filter .checkBoxFilter .checkBox {
+    margin-top: 3px;
+  }
+}
+.editPage .words {
+  display: grid;
+  grid-template-columns: 1fr 1fr 50px;
+  padding: 12px 5px 12px 16px;
+  border: 1px solid grey;
+  margin-bottom: 8px;
+  box-shadow: 0px 0px 2px grey;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+.editPage .words:hover {
+  box-shadow: 0px 0px 10px grey;
+}
+.editPage .words .word {
+  width: 90%;
+  overflow: hidden;
+}
+.editPage .icons {
+  display: flex;
+}
+.editPage .icons .deleteIcon {
+  color: red;
+  height: 100%;
+  width: 20px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.editPage .icons .editIcon {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+.editPage .deleteIconDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.editPage .editIconDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.editPage .viewRef {
+  height: 20px;
+}/*# sourceMappingURL=edit.css.map */
