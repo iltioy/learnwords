@@ -7,6 +7,8 @@ import Edit from "./pages/Edit";
 import EditModal from "./components/Modals/EditModal";
 import { Word } from "./type";
 import CreateCategoryModal from "./components/Modals/CreateCategoryModal";
+import { Context } from "./Context";
+import { Category } from "./type";
 
 let editWord: Word = {
     firstWord: "",
@@ -19,18 +21,34 @@ let editWord: Word = {
     },
 };
 
+let createCategory = "";
+
 function App() {
+    // words + collections
     const [words, setWords] = useState<Word[]>(
         JSON.parse(localStorage.getItem("words")!)
     );
+    useEffect(() => {
+        if (words !== undefined) {
+            localStorage.setItem("words", JSON.stringify(words));
+        }
+    }, [words]);
 
+    // categories
+    const [categories, setCategories] = useState<Category>(
+        JSON.parse(localStorage.getItem("categories")!)
+    );
+
+    useEffect(() => {
+        if (categories !== undefined) {
+            localStorage.setItem("categories", JSON.stringify(categories));
+        }
+    }, [categories]);
+
+    // modals
     const [isEditModal, setIsEditModal] = useState<boolean>(false);
     const [isCreateCategoryModal, setIsCreateCatygoryModal] =
         useState<boolean>(true);
-
-    useEffect(() => {
-        localStorage.setItem("words", JSON.stringify(words));
-    }, [words]);
 
     useEffect(() => {
         if (isEditModal) {
@@ -45,7 +63,8 @@ function App() {
         setIsEditModal(true);
     };
 
-    const invokeCreateCategoryModal = () => {
+    const invokeCreateCategoryModal = (category: string) => {
+        createCategory = category;
         setIsCreateCatygoryModal(true);
     };
 
@@ -56,33 +75,47 @@ function App() {
                     setModal={setIsEditModal}
                     word={editWord}
                     setWords={setWords}
+                    categories={categories}
                 />
             )}
 
             {isCreateCategoryModal && (
-                <CreateCategoryModal setModal={setIsCreateCatygoryModal} />
+                <CreateCategoryModal
+                    setModal={setIsCreateCatygoryModal}
+                    category={createCategory}
+                    setCategories={setCategories}
+                />
             )}
 
             <div className="navbar">as</div>
             <div className="container">
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route
-                        path="/add"
-                        element={<Add words={words} setWords={setWords} />}
-                    />
-                    <Route
-                        path="/edit"
-                        element={
-                            <Edit
-                                words={words}
-                                setWords={setWords}
-                                editWord={invokeEditModal}
-                                createCategory={invokeCreateCategoryModal}
-                            />
-                        }
-                    />
-                </Routes>
+                <Context.Provider value={{ words }}>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route
+                            path="/add"
+                            element={
+                                <Add
+                                    words={words}
+                                    setWords={setWords}
+                                    categories={categories}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/edit"
+                            element={
+                                <Edit
+                                    words={words}
+                                    setWords={setWords}
+                                    editWord={invokeEditModal}
+                                    createCategory={invokeCreateCategoryModal}
+                                    categories={categories}
+                                />
+                            }
+                        />
+                    </Routes>
+                </Context.Provider>
             </div>
         </>
     );

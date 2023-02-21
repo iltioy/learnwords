@@ -3,14 +3,15 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import { useState } from "react";
 import Dropdown from "../components/Dropdown";
-import { Word } from "../type";
+import { Category, Word } from "../type";
 
 interface Props {
     words: Word[];
     setWords: React.Dispatch<React.SetStateAction<Word[]>>;
+    categories: Category;
 }
 
-const Add: React.FC<Props> = ({ words, setWords }) => {
+const Add: React.FC<Props> = ({ words, setWords, categories }) => {
     const [firstWord, setFirstWord] = useState<string>("");
     const [secondWord, setSecondWord] = useState<string>("");
 
@@ -88,6 +89,7 @@ const Add: React.FC<Props> = ({ words, setWords }) => {
                         placeholder="Коллекция"
                         selectedItem={collection}
                         setSelectedItem={setCoolection}
+                        items={categories?.collections}
                     />
 
                     <div className="option">
@@ -110,12 +112,14 @@ const Add: React.FC<Props> = ({ words, setWords }) => {
                         placeholder="Язык"
                         selectedItem={language}
                         setSelectedItem={setLanguage}
+                        items={categories?.languages}
                     />
                     <Dropdown
                         className="option"
                         placeholder="Сложность"
                         selectedItem={difficulty}
                         setSelectedItem={setDifficulty}
+                        items={categories?.difficulties}
                     />
                 </div>
             </div>

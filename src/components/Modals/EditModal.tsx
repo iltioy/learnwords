@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Dropdown from "../Dropdown";
 import Modal from "./Modal";
-import { Word } from "../../type";
+import { Category, Word } from "../../type";
 import "./styles.css";
 import Button from "../Button";
 
@@ -9,9 +9,15 @@ interface Props {
     setModal: React.Dispatch<React.SetStateAction<boolean>>;
     word: Word;
     setWords: React.Dispatch<React.SetStateAction<Word[]>>;
+    categories: Category;
 }
 
-const EditModal: React.FC<Props> = ({ setModal, word, setWords }) => {
+const EditModal: React.FC<Props> = ({
+    setModal,
+    word,
+    setWords,
+    categories,
+}) => {
     const [collection, setCollection] = useState<string | null>(
         word.options.collection
     );
@@ -66,6 +72,7 @@ const EditModal: React.FC<Props> = ({ setModal, word, setWords }) => {
                             setSelectedItem={setCollection}
                             height="35px"
                             bg="white"
+                            items={categories?.collections}
                         />
                     </div>
 
@@ -82,6 +89,7 @@ const EditModal: React.FC<Props> = ({ setModal, word, setWords }) => {
                             setSelectedItem={setDifficulty}
                             height="35px"
                             bg="white"
+                            items={categories?.difficulties}
                         />
                     </div>
                     <div>
@@ -92,12 +100,13 @@ const EditModal: React.FC<Props> = ({ setModal, word, setWords }) => {
                             placeholder={
                                 word.options.language
                                     ? word.options.language
-                                    : "Сложность"
+                                    : "Язык"
                             }
                             selectedItem={language}
                             setSelectedItem={setLanguage}
                             height="35px"
                             bg="white"
+                            items={categories?.languages}
                         />
                     </div>
                     <div className="checkBoxDiv">

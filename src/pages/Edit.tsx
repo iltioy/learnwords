@@ -4,21 +4,23 @@ import Input from "../components/Input";
 import { RxCross1 } from "react-icons/rx";
 import { AiOutlineEdit, AiOutlinePlus } from "react-icons/ai";
 import { useInView } from "react-intersection-observer";
-import { Word } from "../type";
+import { Category, Word } from "../type";
 import Dropdown from "../components/Dropdown";
 
 interface Props {
     words: Word[];
     setWords: React.Dispatch<React.SetStateAction<Word[]>>;
     editWord: (word: Word) => void;
-    createCategory: () => void;
+    createCategory: (category: string) => void;
+    categories: Category;
 }
 
 const Edit: React.FC<Props> = ({
-    words,
     setWords,
     editWord,
     createCategory,
+    words,
+    categories,
 }) => {
     const [search, setSeatch] = useState<string>("");
     const [page, setPage] = useState<number>(1);
@@ -30,7 +32,7 @@ const Edit: React.FC<Props> = ({
     const [repeat, setRepeat] = useState<boolean | null>(null);
 
     const filteredWords = useMemo(() => {
-        return words.filter((word: Word) => {
+        return words?.filter((word: Word) => {
             return (
                 (word.firstWord.toLowerCase().includes(search.toLowerCase()) ||
                     word.secondWord
@@ -58,6 +60,8 @@ const Edit: React.FC<Props> = ({
         if (inView && words.length > page * 10) {
             setPage((prevState) => prevState + 1);
         }
+
+        // eslint-disable-next-line
     }, [inView]);
 
     return (
@@ -83,10 +87,11 @@ const Edit: React.FC<Props> = ({
                             setSelectedItem={setCollection}
                             height="25px"
                             bg="#e8e5e5"
+                            items={categories?.collections}
                         />
                         <div
                             className="filterAdd"
-                            onClick={() => createCategory()}
+                            onClick={() => createCategory("коллекция")}
                         >
                             <AiOutlinePlus />
                             создать новую
@@ -101,10 +106,11 @@ const Edit: React.FC<Props> = ({
                             setSelectedItem={setDifficulty}
                             height="25px"
                             bg="#e8e5e5"
+                            items={categories?.difficulties}
                         />
                         <div
                             className="filterAdd"
-                            onClick={() => createCategory()}
+                            onClick={() => createCategory("сложность")}
                         >
                             <AiOutlinePlus />
                             создать новую
@@ -119,10 +125,11 @@ const Edit: React.FC<Props> = ({
                             setSelectedItem={setLanguage}
                             height="25px"
                             bg="#e8e5e5"
+                            items={categories?.languages}
                         />
                         <div
                             className="filterAdd"
-                            onClick={() => createCategory()}
+                            onClick={() => createCategory("язык")}
                         >
                             <AiOutlinePlus />
                             создать новую
@@ -199,6 +206,7 @@ const Edit: React.FC<Props> = ({
                     ) : (
                         <div>Слова не найдены</div>
                     );
+                    // eslint-disable-next-line
                 }, [
                     words,
                     filteredWords,

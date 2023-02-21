@@ -11,3 +11,9 @@ export interface Options {
     language: string | null;
     repeat: boolean | null;
 }
+
+export interface Category {
+    collections: string[];
+    difficulties: string[];
+    languages: string[];
+}

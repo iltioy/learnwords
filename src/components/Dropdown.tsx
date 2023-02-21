@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { StyledDropdown } from "./StyledDropdown.styled";
 
-const items = ["Первая", "Вторая", "Третья"];
-
 interface Props {
     className: string;
     placeholder: string;
@@ -13,6 +11,7 @@ interface Props {
     bg?: string;
     height?: string;
     styles?: string;
+    items: string[];
 }
 
 const Dropdown: React.FC<Props> = ({
@@ -22,7 +21,7 @@ const Dropdown: React.FC<Props> = ({
     setSelectedItem,
     bg,
     height,
-    styles,
+    items,
 }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     // const [selectedItem, setSelectedItem] = useState<string>(placeholder);
@@ -58,7 +57,7 @@ const Dropdown: React.FC<Props> = ({
             </div>
             {isOpen && (
                 <div className="items">
-                    {items.map((item: string, index: number) => {
+                    {items?.map((item: string, index: number) => {
                         return (
                             <div
                                 className="item"

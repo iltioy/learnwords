@@ -56,3 +56,38 @@
         margin-top: 6px;
     }
 }
+
+.createCategoryModal {
+    position: fixed;
+    height: 400px;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    background-color: white;
+    z-index: 104;
+    border: 1px solid #bdbdbd;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .content {
+        display: flex;
+
+        flex-direction: column;
+        gap: 8px;
+        width: 300px;
+        height: 350px;
+    }
+
+    .categoryEdit {
+        font-size: 20px;
+        margin-top: 7px;
+    }
+
+    .createCategoryButton {
+        margin-top: 5px;
+    }
+}
