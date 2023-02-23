@@ -89,7 +89,9 @@ function App() {
 
             <div className="navbar">as</div>
             <div className="container">
-                <Context.Provider value={{ words }}>
+                <Context.Provider
+                    value={{ invokeCreateCategoryModal, words, categories }}
+                >
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route

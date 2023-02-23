@@ -2,10 +2,11 @@ import "./styles/edit.css";
 import { useEffect, useMemo, useState } from "react";
 import Input from "../components/Input";
 import { RxCross1 } from "react-icons/rx";
-import { AiOutlineEdit, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineArrowDown } from "react-icons/ai";
 import { useInView } from "react-intersection-observer";
 import { Category, Word } from "../type";
-import Dropdown from "../components/Dropdown";
+
+import Filters from "../components/Filters";
 
 interface Props {
     words: Word[];
@@ -15,39 +16,15 @@ interface Props {
     categories: Category;
 }
 
-const Edit: React.FC<Props> = ({
-    setWords,
-    editWord,
-    createCategory,
-    words,
-    categories,
-}) => {
+const Edit: React.FC<Props> = ({ setWords, editWord, words }) => {
     const [search, setSeatch] = useState<string>("");
     const [page, setPage] = useState<number>(1);
 
-    // const [isSettingShowed, setIsSettingShowed] = useState<boolean>(false);
-    const [collection, setCollection] = useState<string | null>(null);
-    const [difficulty, setDifficulty] = useState<string | null>(null);
-    const [language, setLanguage] = useState<string | null>(null);
-    const [repeat, setRepeat] = useState<boolean | null>(null);
+    const [areFiltersShowed, setAreFiltersShowed] = useState<boolean>(false);
 
-    const filteredWords = useMemo(() => {
-        return words?.filter((word: Word) => {
-            return (
-                (word.firstWord.toLowerCase().includes(search.toLowerCase()) ||
-                    word.secondWord
-                        .toLowerCase()
-                        .includes(search.toLowerCase())) &&
-                (word.options.collection === collection ||
-                    collection === null) &&
-                (word.options.difficulty === difficulty ||
-                    difficulty === null) &&
-                (word.options.language === language || language === null) &&
-                (word.options.repeat === repeat || repeat === null)
-            );
-        });
-    }, [words, search, collection, difficulty, language, repeat]);
+    const [filteredWords, setFilteredWords] = useState<Word[]>(words);
 
+    console.log(page);
     const { ref, inView } = useInView();
 
     const handleDelete = (word: Word) => {
@@ -64,6 +41,8 @@ const Edit: React.FC<Props> = ({
         // eslint-disable-next-line
     }, [inView]);
 
+    console.log(areFiltersShowed);
+
     return (
         <>
             <div className="editPage">
@@ -76,82 +55,25 @@ const Edit: React.FC<Props> = ({
                     </div>
                     <Input setValue={setSeatch} value={search} forLabel="4" />
                 </div>
-                <div className="filtersHeader">Фильтры</div>
-                <div className="filters">
-                    <div className="filter flex column">
-                        <div className="filterHeader">Колекция:</div>
-                        <Dropdown
-                            className="filterOption"
-                            placeholder="Не выбрано"
-                            selectedItem={collection}
-                            setSelectedItem={setCollection}
-                            height="25px"
-                            bg="#e8e5e5"
-                            items={categories?.collections}
-                        />
-                        <div
-                            className="filterAdd"
-                            onClick={() => createCategory("коллекция")}
-                        >
-                            <AiOutlinePlus />
-                            создать новую
-                        </div>
-                    </div>
-                    <div className="filter flex column">
-                        <div className="filterHeader">Сложность:</div>
-                        <Dropdown
-                            className="filterOption"
-                            placeholder="Не выбрано"
-                            selectedItem={difficulty}
-                            setSelectedItem={setDifficulty}
-                            height="25px"
-                            bg="#e8e5e5"
-                            items={categories?.difficulties}
-                        />
-                        <div
-                            className="filterAdd"
-                            onClick={() => createCategory("сложность")}
-                        >
-                            <AiOutlinePlus />
-                            создать новую
-                        </div>
-                    </div>
-                    <div className="filter flex column">
-                        <div className="filterHeader">Язык:</div>
-                        <Dropdown
-                            className="filterOption"
-                            placeholder="Не выбрано"
-                            selectedItem={language}
-                            setSelectedItem={setLanguage}
-                            height="25px"
-                            bg="#e8e5e5"
-                            items={categories?.languages}
-                        />
-                        <div
-                            className="filterAdd"
-                            onClick={() => createCategory("язык")}
-                        >
-                            <AiOutlinePlus />
-                            создать новую
-                        </div>
-                    </div>
-                    <div className="filter flex row">
-                        <div className="checkBoxFilter">
-                            <div className="filterHeader">Повторение:</div>
-                            <input
-                                className="checkBox"
-                                id="checkBox"
-                                type="checkbox"
-                                onChange={(e) =>
-                                    e.target.checked
-                                        ? setRepeat(e.target.checked)
-                                        : setRepeat(null)
-                                }
-                                checked={repeat ? true : false}
-                            />
-                        </div>
+                <div
+                    className="filtersHeaderDiv"
+                    onClick={() =>
+                        setAreFiltersShowed((prevState) => !prevState)
+                    }
+                >
+                    <div className="filtersHeader">Фильтры</div>
+                    <div className="iconDiv">
+                        <AiOutlineArrowDown className="icon" />
                     </div>
                 </div>
+
+                <Filters
+                    setFilteredWords={setFilteredWords}
+                    className={areFiltersShowed ? "" : "hidden"}
+                    search={search}
+                    areFiltersShowed={areFiltersShowed}
+                />
+
                 <hr />
                 <div className="titles">
                     <div className="title">Слово</div>
@@ -207,15 +129,7 @@ const Edit: React.FC<Props> = ({
                         <div>Слова не найдены</div>
                     );
                     // eslint-disable-next-line
-                }, [
-                    words,
-                    filteredWords,
-                    page,
-                    collection,
-                    difficulty,
-                    language,
-                    repeat,
-                ])}
+                }, [words, filteredWords, page])}
             </div>
         </>
     );

@@ -58,4 +58,8 @@ body,
 
 .pointer {
   cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
 }/*# sourceMappingURL=global.css.map */

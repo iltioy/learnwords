@@ -11,77 +11,33 @@
   transition: 0.5s;
   border-radius: 5px;
 }
-.editPage .filtersHeader {
+.editPage .filtersHeaderDiv {
   margin-top: 10px;
   font-size: 20px;
-}
-.editPage .filters {
   border: 1px solid grey;
-  margin-top: 5px;
+  padding: 10px;
   border-radius: 5px;
-  padding: 15px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 100px 100px;
-  row-gap: 30px;
-}
-@media (max-width: 1000px) {
-  .editPage .filters {
-    grid-template-columns: 1fr 1fr;
-    -moz-column-gap: 10px;
-         column-gap: 10px;
-  }
-}
-.editPage .filter {
-  width: 200px;
-  margin-left: 10px;
-}
-@media (max-width: 600px) {
-  .editPage .filter {
-    width: 170px;
-  }
-}
-.editPage .filter .filterHeader {
-  font-size: 25px;
-  margin-bottom: 7px;
-}
-@media (max-width: 600px) {
-  .editPage .filter .filterHeader {
-    font-size: 18px;
-  }
-}
-.editPage .filter .filterOption {
-  border: 1px solid grey;
-  display: flex;
-  text-align: center;
-  height: 30px;
-  border-radius: 5px;
-}
-.editPage .filter .filterAdd {
-  cursor: pointer;
   display: flex;
   align-items: center;
-  color: blue;
-  margin-top: 4px;
+  flex-direction: row;
+  cursor: pointer;
 }
-.editPage .filter .filterAdd:hover {
-  text-decoration: underline;
+.editPage .filtersHeaderDiv .filtersHeader {
+  margin-left: 10px;
 }
-.editPage .filter .checkBoxFilter {
+.editPage .filtersHeaderDiv .iconDiv {
+  margin-left: auto;
+  margin-right: 10px;
+  height: 23px;
+  width: 23px;
   display: flex;
-  max-height: 100px;
-  margin-bottom: 0;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  margin-top: 2px;
 }
-.editPage .filter .checkBoxFilter .checkBox {
-  height: 20px;
-  margin-top: 9px;
-}
-@media (max-width: 600px) {
-  .editPage .filter .checkBoxFilter .checkBox {
-    margin-top: 3px;
-  }
+.editPage .filtersHeaderDiv .iconDiv .icon {
+  height: 100%;
+  width: 100%;
 }
 .editPage .words {
   display: grid;
