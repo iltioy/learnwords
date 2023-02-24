@@ -21,4 +21,14 @@ export const StyledInput = styled.div<Props>`
         color: #212529;
         margin-top: 10px;
     }
+
+    .underlined {
+        font-size: 20px;
+        border: none;
+        border-bottom: 1px solid black;
+        outline: none;
+        border-radius: 0px;
+        padding: 0px;
+        height: 37px;
+    }
 `;

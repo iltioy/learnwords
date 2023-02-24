@@ -7,6 +7,7 @@ interface Props {
     height?: string;
     value: string | undefined;
     setValue: React.Dispatch<React.SetStateAction<string>>;
+    className?: string;
 }
 
 const Input: React.FC<Props> = ({
@@ -16,6 +17,7 @@ const Input: React.FC<Props> = ({
     height,
     value,
     setValue,
+    className,
 }) => {
     return (
         <StyledInput height={height}>
@@ -26,6 +28,7 @@ const Input: React.FC<Props> = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
+                className={`${className ? className : ""}`}
             />
         </StyledInput>
     );

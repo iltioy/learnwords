@@ -48,7 +48,7 @@ function App() {
     // modals
     const [isEditModal, setIsEditModal] = useState<boolean>(false);
     const [isCreateCategoryModal, setIsCreateCatygoryModal] =
-        useState<boolean>(true);
+        useState<boolean>(false);
 
     useEffect(() => {
         if (isEditModal) {

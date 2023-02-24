@@ -13,8 +13,8 @@ export const StyledFilters = styled.div<Props>`
     border-radius: 5px;
     padding: 15px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 100px 100px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 100px;
     row-gap: 30px;
 
     @media (max-width: 1000px) {

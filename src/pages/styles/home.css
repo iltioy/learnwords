@@ -1,0 +1,67 @@
+.homePage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  align-items: start;
+}
+@media (max-width: 1000px) {
+  .homePage {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}
+.homePage .settingsHeaderDiv {
+  font-size: 24px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.homePage .settingsHeaderDiv .settingsHeader {
+  margin-left: 15px;
+}
+.homePage .filters {
+  grid-template-columns: 1fr 1fr;
+}
+.homePage .mainLearner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.homePage .mainLearnerOuter {
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 10px;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.homePage .mainLearnerOuter .mainLearnerInner {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 375px;
+}
+.homePage .mainLearnerOuter .mainLearnerInner .headerDiv {
+  font-size: 22px;
+  margin-bottom: 7px;
+  margin-bottom: 20px;
+}
+.homePage .mainLearnerOuter .mainLearnerInner .wordDiv {
+  font-size: 20px;
+  word-wrap: break-word;
+  max-height: 48px;
+  overflow: hidden;
+  margin-bottom: 7px;
+}
+.homePage .mainLearnerOuter .mainLearnerInner .leranButton {
+  margin-top: 10px;
+  margin-left: -1px;
+}/*# sourceMappingURL=home.css.map */

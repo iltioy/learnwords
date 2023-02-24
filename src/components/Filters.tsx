@@ -1,7 +1,7 @@
 import { useState, useContext, useMemo, useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Context } from "../Context";
-import { Category, Word } from "../type";
+import { Word } from "../type";
 import Dropdown from "./Dropdown";
 import { StyledFilters } from "./StyledFilters";
 
@@ -69,7 +69,7 @@ const Filters: React.FC<Props> = ({
     return (
         <>
             <StyledFilters
-                className={`filters disabled`}
+                className={`filters`}
                 areFiltersShowed={areFiltersShowed}
             >
                 <div className="filter flex column">
@@ -129,7 +129,7 @@ const Filters: React.FC<Props> = ({
                         создать новую
                     </div>
                 </div>
-                <div className="filter flex row">
+                <div className="filter flex row" style={{ marginTop: "5px" }}>
                     <div className="checkBoxFilter">
                         <div className="filterHeader">Повторение:</div>
                         <input

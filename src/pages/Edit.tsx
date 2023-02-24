@@ -2,7 +2,8 @@ import "./styles/edit.css";
 import { useEffect, useMemo, useState } from "react";
 import Input from "../components/Input";
 import { RxCross1 } from "react-icons/rx";
-import { AiOutlineEdit, AiOutlineArrowDown } from "react-icons/ai";
+import { AiOutlineEdit } from "react-icons/ai";
+import { BsChevronDown } from "react-icons/bs";
 import { useInView } from "react-intersection-observer";
 import { Category, Word } from "../type";
 
@@ -63,7 +64,7 @@ const Edit: React.FC<Props> = ({ setWords, editWord, words }) => {
                 >
                     <div className="filtersHeader">Фильтры</div>
                     <div className="iconDiv">
-                        <AiOutlineArrowDown className="icon" />
+                        <BsChevronDown className="icon" />
                     </div>
                 </div>
 
