@@ -5,34 +5,57 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import { Word } from "../type";
 import Filters from "../components/Filters";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     const { words } = useContext(Context);
     const [counter, setCounter] = useState<number>(0);
     const [value, setValue] = useState("");
-    const [filteredWords, setFilteredWords] = useState<Word[]>(words);
-    // const [currentWord, setCurrentWord] = useState<Word | null | undefined>(
-    //     filteredWords ? filteredWords[counter] : null
-    // );
+    const [filteredWords, setFilteredWords] = useState<Word[]>(
+        words ? words : []
+    );
+    const [wordsToUse, setWordsToUse] = useState<Word[]>(words ? words : []);
+    const [areSettingsShowed, setAreSettingsShowed] = useState<boolean>(false);
+    const [isRepeat, setIsRepeat] = useState<boolean>(false);
 
     useEffect(() => {
-        //setCurrentWord(filteredWords[0]);
         setCounter(0);
-    }, [filteredWords]);
+
+        if (filteredWords) {
+            shuffleArray(filteredWords);
+        }
+    }, [filteredWords, isRepeat]);
+
+    function shuffleArray(array: Word[]) {
+        var tempArray: Word[] = JSON.parse(JSON.stringify(array));
+        for (var i = tempArray.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = tempArray[i];
+            tempArray[i] = tempArray[j];
+            tempArray[j] = temp;
+        }
+
+        setWordsToUse(tempArray);
+    }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         setValue("");
 
-        if (filteredWords[counter]?.secondWord === value) {
+        if (
+            wordsToUse[counter]?.secondWord.toLowerCase() ===
+            value.toLowerCase()
+        ) {
             setCounter((prevState: number) => prevState + 1);
-        }
-        // if (currentWord?.secondWord === value) {
-        //     counter++;
 
-        //     setCurrentWord(filteredWords[counter]);
-        // }
+            if (counter + 2 > wordsToUse.length && isRepeat) {
+                setCounter(0);
+                if (filteredWords) {
+                    shuffleArray(filteredWords);
+                }
+            }
+        }
     };
     return (
         <div className="homePage">
@@ -42,10 +65,9 @@ const Home = () => {
                         <div className="headerDiv">
                             Переводите слова на другой язык:
                         </div>
-
                         <div className="wordDiv">
-                            {filteredWords[counter]?.firstWord}{" "}
-                            {counter + 1 > filteredWords?.length
+                            {wordsToUse[counter]?.firstWord}
+                            {counter + 1 > wordsToUse?.length
                                 ? "Все слова переведены!"
                                 : ""}
                         </div>
@@ -64,8 +86,8 @@ const Home = () => {
                             >
                                 Далее
                             </Button>
-
-                            {/* <div className="checkBoxRepeat">
+                        </form>
+                        <div className="checkBoxRepeat">
                             <div className="checkboxHeader">
                                 Повторять слова:
                             </div>
@@ -73,21 +95,47 @@ const Home = () => {
                                 className="checkBox"
                                 id="checkBox"
                                 type="checkbox"
+                                onChange={(e) =>
+                                    e.target.checked
+                                        ? setIsRepeat(e.target.checked)
+                                        : setIsRepeat(false)
+                                }
+                                checked={isRepeat ? true : false}
                             />
-                        </div> */}
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <div className="settingsHeaderDiv">
-                    <div className="settingsHeader">Настройки</div>
+            <div className="mainButtons">
+                <div className="mainButtonsInner">
+                    <div style={{ position: "relative" }}>
+                        <div
+                            className="outlineDiv"
+                            onClick={() =>
+                                setAreSettingsShowed(
+                                    (prevState: boolean) => !prevState
+                                )
+                            }
+                        >
+                            <div className="settingsHeader">Настройки</div>
+                        </div>
+                        <Filters
+                            areFiltersShowed={areSettingsShowed}
+                            className="absolute"
+                            setFilteredWords={setFilteredWords}
+                        />
+                    </div>
+                    <div className="outlineDiv">
+                        <Link to="/add" className="settingsLink">
+                            Добавить слово
+                        </Link>
+                    </div>
+                    <div className="outlineDiv">
+                        <Link to="/edit" className="settingsLink">
+                            Редактировать слова
+                        </Link>
+                    </div>
                 </div>
-                <Filters
-                    areFiltersShowed={true}
-                    className=""
-                    setFilteredWords={setFilteredWords}
-                />
             </div>
         </div>
     );

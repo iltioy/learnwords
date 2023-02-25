@@ -33,6 +33,13 @@ const Filters: React.FC<Props> = ({
         createCategory(category);
     };
 
+    const resetFilters = () => {
+        setCollection(null);
+        setDifficulty(null);
+        setLanguage(null);
+        setRepeat(null);
+    };
+
     const newFilteredWords = useMemo(() => {
         return words?.filter((word: Word) => {
             if (search) {
@@ -66,10 +73,11 @@ const Filters: React.FC<Props> = ({
     useEffect(() => {
         setFilteredWords(newFilteredWords);
     }, [newFilteredWords]);
+
     return (
         <>
             <StyledFilters
-                className={`filters`}
+                className={`filters ${className ? className : ""}`}
                 areFiltersShowed={areFiltersShowed}
             >
                 <div className="filter flex column">
@@ -129,7 +137,10 @@ const Filters: React.FC<Props> = ({
                         создать новую
                     </div>
                 </div>
-                <div className="filter flex row" style={{ marginTop: "5px" }}>
+                <div
+                    className="filter flex column"
+                    style={{ marginTop: "5px" }}
+                >
                     <div className="checkBoxFilter">
                         <div className="filterHeader">Повторение:</div>
                         <input
@@ -143,6 +154,9 @@ const Filters: React.FC<Props> = ({
                             }
                             checked={repeat ? true : false}
                         />
+                    </div>
+                    <div className="reset" onClick={() => resetFilters()}>
+                        cбрость фильтры
                     </div>
                 </div>
             </StyledFilters>

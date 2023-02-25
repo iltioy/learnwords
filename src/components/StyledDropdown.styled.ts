@@ -23,6 +23,7 @@ export const StyledDropdown = styled.div<Props>`
         top: 100%;
         left: 0;
         z-index: 101;
+        border-radius: 5px;
         .item {
             display: flex;
             justify-content: center;

@@ -6,19 +6,27 @@
     align-items: center;
     align-items: start;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 920px) {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
     }
 
-    .settingsHeaderDiv {
+    .outlineDiv {
         font-size: 24px;
         border: 1px solid grey;
         border-radius: 5px;
         padding: 10px;
         margin-bottom: 10px;
+        cursor: pointer;
 
         .settingsHeader {
+            margin-left: 15px;
+        }
+
+        .settingsLink {
+            text-decoration: none;
+            outline: none;
+            color: black;
             margin-left: 15px;
         }
     }
@@ -36,6 +44,21 @@
         align-items: center;
     }
 
+    .mainButtons {
+        height: 100%;
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+
+        .mainButtonsInner {
+            width: 100%;
+            @media (max-width: 1000px) {
+                width: 430px;
+            }
+        }
+    }
+
     .mainLearnerOuter {
         border: 1px solid grey;
         border-radius: 5px;
@@ -47,16 +70,17 @@
         justify-content: center;
         align-items: center;
 
-        // .checkBoxRepeat {
-        //     display: flex;
-        //     margin-top: 20px;
-        //     .checkBox {
-        //         margin-top: 8px;
-        //     }
-        // }
-        // .checkboxHeader {
-        //     font-size: 20px;
-        // }
+        .checkBoxRepeat {
+            display: flex;
+            margin-top: auto;
+            margin-bottom: 10px;
+            .checkBox {
+                margin-top: 8px;
+            }
+        }
+        .checkboxHeader {
+            font-size: 20px;
+        }
 
         .mainLearnerInner {
             display: flex;

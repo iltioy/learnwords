@@ -16,17 +16,27 @@ export const StyledFilters = styled.div<Props>`
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 100px;
     row-gap: 30px;
-
+    background: white;
     @media (max-width: 1000px) {
         grid-template-columns: 1fr 1fr;
         column-gap: 10px;
+    }
+
+    .reset {
+        display: flex;
+        margin-left: 2px;
+        font-size: 16px;
+        text-decoration: underline;
+
+        margin-top: 20px;
+        cursor: pointer;
     }
 
     .filter {
         width: 200px;
         margin-left: 10px;
 
-        @media (max-width: 600px) {
+        @media (max-width: 1000px) {
             width: 170px;
         }
 
@@ -34,7 +44,7 @@ export const StyledFilters = styled.div<Props>`
             font-size: 25px;
             margin-bottom: 7px;
 
-            @media (max-width: 600px) {
+            @media (max-width: 1000px) {
                 font-size: 18px;
             }
         }
@@ -63,7 +73,6 @@ export const StyledFilters = styled.div<Props>`
             display: flex;
             max-height: 100px;
             margin-bottom: 0;
-            justify-content: center;
             align-items: flex-start;
 
             .checkBox {

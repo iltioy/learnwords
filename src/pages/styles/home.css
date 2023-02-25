@@ -6,20 +6,27 @@
   align-items: center;
   align-items: start;
 }
-@media (max-width: 1000px) {
+@media (max-width: 920px) {
   .homePage {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
   }
 }
-.homePage .settingsHeaderDiv {
+.homePage .outlineDiv {
   font-size: 24px;
   border: 1px solid grey;
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
-.homePage .settingsHeaderDiv .settingsHeader {
+.homePage .outlineDiv .settingsHeader {
+  margin-left: 15px;
+}
+.homePage .outlineDiv .settingsLink {
+  text-decoration: none;
+  outline: none;
+  color: black;
   margin-left: 15px;
 }
 .homePage .filters {
@@ -32,6 +39,20 @@
   justify-content: center;
   align-items: center;
 }
+.homePage .mainButtons {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.homePage .mainButtons .mainButtonsInner {
+  width: 100%;
+}
+@media (max-width: 1000px) {
+  .homePage .mainButtons .mainButtonsInner {
+    width: 430px;
+  }
+}
 .homePage .mainLearnerOuter {
   border: 1px solid grey;
   border-radius: 5px;
@@ -42,6 +63,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.homePage .mainLearnerOuter .checkBoxRepeat {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+.homePage .mainLearnerOuter .checkBoxRepeat .checkBox {
+  margin-top: 8px;
+}
+.homePage .mainLearnerOuter .checkboxHeader {
+  font-size: 20px;
 }
 .homePage .mainLearnerOuter .mainLearnerInner {
   display: flex;

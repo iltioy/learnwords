@@ -24,8 +24,6 @@ const Edit: React.FC<Props> = ({ setWords, editWord, words }) => {
     const [areFiltersShowed, setAreFiltersShowed] = useState<boolean>(false);
 
     const [filteredWords, setFilteredWords] = useState<Word[]>(words);
-
-    console.log(page);
     const { ref, inView } = useInView();
 
     const handleDelete = (word: Word) => {
@@ -41,8 +39,6 @@ const Edit: React.FC<Props> = ({ setWords, editWord, words }) => {
 
         // eslint-disable-next-line
     }, [inView]);
-
-    console.log(areFiltersShowed);
 
     return (
         <>

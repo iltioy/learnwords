@@ -18,7 +18,9 @@ const CreateCategoryModal: React.FC<Props> = ({
 }) => {
     const [inputValue, setInputValue] = useState<string>("");
 
-    const handleSave = () => {
+    const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         setCategories((prevState: Category) => {
             let collections = prevState?.collections;
             let difficulties = prevState?.difficulties;
@@ -53,21 +55,22 @@ const CreateCategoryModal: React.FC<Props> = ({
         <>
             <Modal setModal={setModal} />
             <div className="createCategoryModal">
-                <div className="content">
+                <form className="content" onSubmit={(e) => handleSave(e)}>
                     <div className="categoryEdit">
                         Настройка категории {category}
                     </div>
                     <Input value={inputValue} setValue={setInputValue} />
-                    <div onClick={() => handleSave()}>
+                    <div>
                         <Button
                             bg="#5B53F1"
                             color="white"
                             className="createCategoryButton"
+                            type="submit"
                         >
                             Создать
                         </Button>
                     </div>
-                </div>
+                </form>
             </div>
         </>
     );
