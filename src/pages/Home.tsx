@@ -17,6 +17,7 @@ const Home = () => {
     const [wordsToUse, setWordsToUse] = useState<Word[]>(words ? words : []);
     const [areSettingsShowed, setAreSettingsShowed] = useState<boolean>(false);
     const [isRepeat, setIsRepeat] = useState<boolean>(false);
+    const [correct, setCorrect] = useState<number>(0);
 
     useEffect(() => {
         setCounter(0);
@@ -34,10 +35,10 @@ const Home = () => {
             tempArray[i] = tempArray[j];
             tempArray[j] = temp;
         }
+        console.log("first");
 
         setWordsToUse(tempArray);
     }
-
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -55,6 +56,29 @@ const Home = () => {
                     shuffleArray(filteredWords);
                 }
             }
+
+            setCorrect(1);
+        } else {
+            if (correct < 2) {
+                setCorrect(2);
+            } else {
+                setCorrect((prevState: number) => {
+                    return prevState + 1;
+                });
+            }
+        }
+    };
+
+    const skipWord = () => {
+        setValue("");
+
+        setCounter((prevState: number) => prevState + 1);
+        setCorrect(0);
+        if (counter + 2 > wordsToUse.length && isRepeat) {
+            setCounter(0);
+            if (filteredWords) {
+                shuffleArray(filteredWords);
+            }
         }
     };
     return (
@@ -71,6 +95,7 @@ const Home = () => {
                                 ? "Все слова переведены!"
                                 : ""}
                         </div>
+
                         <form action="" onSubmit={(e) => handleSubmit(e)}>
                             <Input
                                 value={value}
@@ -78,15 +103,43 @@ const Home = () => {
                                 className="underlined"
                                 placeholder="Перевод слова..."
                             />
-                            <Button
-                                bg="#3538F1"
-                                color="white"
-                                className="leranButton"
-                                type="submit"
-                            >
-                                Далее
-                            </Button>
+                            <div className="flex row">
+                                <Button
+                                    bg="#3538F1"
+                                    color="white"
+                                    className="leranButton"
+                                    type="submit"
+                                >
+                                    Далее
+                                </Button>
+                                <div onClick={() => skipWord()}>
+                                    <Button
+                                        className={`learnSkipButton ${
+                                            correct < 5 ? "hidden" : ""
+                                        }`}
+                                    >
+                                        Пропустить
+                                    </Button>
+                                </div>
+                            </div>
                         </form>
+
+                        <div
+                            className={`${
+                                correct === 0
+                                    ? "hidden"
+                                    : correct === 1
+                                    ? "correct"
+                                    : "incorrect"
+                            }`}
+                        >
+                            {correct === 1
+                                ? "Верно!"
+                                : correct >= 2
+                                ? "Неверно!"
+                                : ""}
+                        </div>
+
                         <div className="checkBoxRepeat">
                             <div className="checkboxHeader">
                                 Повторять слова:

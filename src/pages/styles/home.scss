@@ -82,6 +82,10 @@
             font-size: 20px;
         }
 
+        .tipDiv {
+            font-size: 16px;
+        }
+
         .mainLearnerInner {
             display: flex;
             flex-direction: column;
@@ -103,6 +107,42 @@
             .leranButton {
                 margin-top: 10px;
                 margin-left: -1px;
+            }
+
+            .learnSkipButton {
+                button {
+                    width: 110px;
+                    margin-top: 10px;
+                    margin-left: 10px;
+                }
+            }
+
+            .correct {
+                background-color: rgb(27, 190, 27);
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 70px;
+                font-size: 18px;
+                margin-top: 10px;
+                margin-left: 1;
+            }
+
+            .incorrect {
+                background-color: rgb(254, 46, 46);
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 75px;
+                font-size: 18px;
+                margin-top: 10px;
+                margin-left: 1;
             }
         }
     }

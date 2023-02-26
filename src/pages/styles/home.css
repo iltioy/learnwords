@@ -75,6 +75,9 @@
 .homePage .mainLearnerOuter .checkboxHeader {
   font-size: 20px;
 }
+.homePage .mainLearnerOuter .tipDiv {
+  font-size: 16px;
+}
 .homePage .mainLearnerOuter .mainLearnerInner {
   display: flex;
   flex-direction: column;
@@ -96,4 +99,35 @@
 .homePage .mainLearnerOuter .mainLearnerInner .leranButton {
   margin-top: 10px;
   margin-left: -1px;
+}
+.homePage .mainLearnerOuter .mainLearnerInner .learnSkipButton button {
+  width: 110px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.homePage .mainLearnerOuter .mainLearnerInner .correct {
+  background-color: rgb(27, 190, 27);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-left: 1;
+}
+.homePage .mainLearnerOuter .mainLearnerInner .incorrect {
+  background-color: rgb(254, 46, 46);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75px;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-left: 1;
 }/*# sourceMappingURL=home.css.map */
