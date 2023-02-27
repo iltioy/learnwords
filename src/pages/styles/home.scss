@@ -1,8 +1,8 @@
 .homePage {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
     justify-content: center;
+    row-gap: 20px;
     align-items: center;
     align-items: start;
 
@@ -40,8 +40,11 @@
         height: 100%;
 
         display: flex;
-        justify-content: center;
         align-items: center;
+
+        @media (max-width: 1000px) {
+            justify-content: center;
+        }
     }
 
     .mainButtons {
@@ -142,7 +145,6 @@
                 width: 75px;
                 font-size: 18px;
                 margin-top: 10px;
-                margin-left: 1;
             }
         }
     }

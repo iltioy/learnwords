@@ -79,7 +79,7 @@ export const StyledFilters = styled.div<Props>`
                 height: 20px;
                 margin-top: 9px;
 
-                @media (max-width: 600px) {
+                @media (max-width: 1000px) {
                     margin-top: 3px;
                 }
             }

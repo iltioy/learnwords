@@ -170,7 +170,9 @@ const Home = () => {
                                 )
                             }
                         >
-                            <div className="settingsHeader">Настройки</div>
+                            <div className="settingsHeader noselect">
+                                Настройки
+                            </div>
                         </div>
                         <Filters
                             areFiltersShowed={areSettingsShowed}

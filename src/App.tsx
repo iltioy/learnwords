@@ -9,6 +9,7 @@ import { Word } from "./type";
 import CreateCategoryModal from "./components/Modals/CreateCategoryModal";
 import { Context } from "./Context";
 import { Category } from "./type";
+import Navbar from "./components/Navbar";
 
 let editWord: Word = {
     firstWord: "",
@@ -87,7 +88,7 @@ function App() {
                 />
             )}
 
-            <div className="navbar">as</div>
+            <Navbar />
             <div className="container">
                 <Context.Provider
                     value={{ invokeCreateCategoryModal, words, categories }}
