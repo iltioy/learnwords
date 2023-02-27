@@ -13,6 +13,7 @@ export const StyledDropdown = styled.div<Props>`
     justify-content: center;
 
     .selectedItem {
+        overflow: hidden;
         cursor: pointer;
         width: 100%;
     }
@@ -32,6 +33,8 @@ export const StyledDropdown = styled.div<Props>`
             border: 1px solid grey;
             overflow: hidden;
             cursor: pointer;
+            color: ${({ theme }) => theme.color};
+            background-color: ${({ theme }) => theme.addBackground};
         }
     }
 `;

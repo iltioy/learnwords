@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import { useState } from "react";
 import Dropdown from "../components/Dropdown";
 import { Category, Word } from "../type";
+import { StyledAdd } from "./styles/AddStyled.styled";
 
 interface Props {
     words: Word[];
@@ -62,7 +63,7 @@ const Add: React.FC<Props> = ({ words, setWords, categories }) => {
     };
 
     return (
-        <div className="addPage">
+        <StyledAdd>
             <form action="" onSubmit={(e) => handeSubmit(e)}>
                 <Input
                     placeholder="Первое слово"
@@ -123,7 +124,7 @@ const Add: React.FC<Props> = ({ words, setWords, categories }) => {
                     />
                 </div>
             </div>
-        </div>
+        </StyledAdd>
     );
 };
 

@@ -16,7 +16,7 @@ export const StyledFilters = styled.div<Props>`
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 100px;
     row-gap: 30px;
-    background: white;
+    background-color: ${({ theme }) => theme.addBackground};
     @media (max-width: 1000px) {
         grid-template-columns: 1fr 1fr;
         column-gap: 10px;

@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import { Word } from "../type";
 import Filters from "../components/Filters";
 import { Link } from "react-router-dom";
+import { StyledHome } from "./styles/HomeStyled.styled";
 
 const Home = () => {
     const { words } = useContext(Context);
@@ -35,10 +36,10 @@ const Home = () => {
             tempArray[i] = tempArray[j];
             tempArray[j] = temp;
         }
-        console.log("first");
 
         setWordsToUse(tempArray);
     }
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -82,7 +83,7 @@ const Home = () => {
         }
     };
     return (
-        <div className="homePage">
+        <StyledHome>
             <div className="mainLearner">
                 <div className="mainLearnerOuter">
                     <div className="mainLearnerInner">
@@ -192,7 +193,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </StyledHome>
     );
 };
 

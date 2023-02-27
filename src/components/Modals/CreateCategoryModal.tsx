@@ -3,6 +3,7 @@ import { Category } from "../../type";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "./Modal";
+import { StyledModal } from "./StyledModal.styled";
 import "./styles.css";
 
 interface Props {
@@ -54,7 +55,7 @@ const CreateCategoryModal: React.FC<Props> = ({
     return (
         <>
             <Modal setModal={setModal} />
-            <div className="createCategoryModal">
+            <StyledModal>
                 <form className="content" onSubmit={(e) => handleSave(e)}>
                     <div className="categoryEdit">
                         Настройка категории {category}
@@ -71,7 +72,7 @@ const CreateCategoryModal: React.FC<Props> = ({
                         </Button>
                     </div>
                 </form>
-            </div>
+            </StyledModal>
         </>
     );
 };

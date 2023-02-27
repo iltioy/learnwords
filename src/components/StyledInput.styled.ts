@@ -18,8 +18,9 @@ export const StyledInput = styled.div<Props>`
         border: 1px solid black;
         font-size: 16px;
         font-family: inherit;
-        color: #212529;
         margin-top: 10px;
+        color: ${({ theme }) => theme.inputColor};
+        background: ${({ theme }) => theme.input};
     }
 
     .underlined {

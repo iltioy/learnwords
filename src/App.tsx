@@ -10,6 +10,10 @@ import CreateCategoryModal from "./components/Modals/CreateCategoryModal";
 import { Context } from "./Context";
 import { Category } from "./type";
 import Navbar from "./components/Navbar";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle } from "./styles/GlobalStyle";
+import { Theme } from "./defaultTheme";
+import { themes } from "./defaultTheme";
 
 let editWord: Word = {
     firstWord: "",
@@ -25,6 +29,9 @@ let editWord: Word = {
 let createCategory = "";
 
 function App() {
+    // theme
+    const [theme, setTheme] = useState<Theme>(themes.dark);
+
     // words + collections
     const [words, setWords] = useState<Word[]>(
         JSON.parse(localStorage.getItem("words")!)
@@ -71,55 +78,60 @@ function App() {
 
     return (
         <>
-            {isEditModal && (
-                <EditModal
-                    setModal={setIsEditModal}
-                    word={editWord}
-                    setWords={setWords}
-                    categories={categories}
-                />
-            )}
+            <ThemeProvider theme={theme}>
+                {isEditModal && (
+                    <EditModal
+                        setModal={setIsEditModal}
+                        word={editWord}
+                        setWords={setWords}
+                        categories={categories}
+                    />
+                )}
 
-            {isCreateCategoryModal && (
-                <CreateCategoryModal
-                    setModal={setIsCreateCatygoryModal}
-                    category={createCategory}
-                    setCategories={setCategories}
-                />
-            )}
+                {isCreateCategoryModal && (
+                    <CreateCategoryModal
+                        setModal={setIsCreateCatygoryModal}
+                        category={createCategory}
+                        setCategories={setCategories}
+                    />
+                )}
 
-            <Navbar />
-            <div className="container">
-                <Context.Provider
-                    value={{ invokeCreateCategoryModal, words, categories }}
-                >
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route
-                            path="/add"
-                            element={
-                                <Add
-                                    words={words}
-                                    setWords={setWords}
-                                    categories={categories}
-                                />
-                            }
-                        />
-                        <Route
-                            path="/edit"
-                            element={
-                                <Edit
-                                    words={words}
-                                    setWords={setWords}
-                                    editWord={invokeEditModal}
-                                    createCategory={invokeCreateCategoryModal}
-                                    categories={categories}
-                                />
-                            }
-                        />
-                    </Routes>
-                </Context.Provider>
-            </div>
+                <Navbar theme={theme} setTheme={setTheme} />
+                <div className="container">
+                    <Context.Provider
+                        value={{ invokeCreateCategoryModal, words, categories }}
+                    >
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route
+                                path="/add"
+                                element={
+                                    <Add
+                                        words={words}
+                                        setWords={setWords}
+                                        categories={categories}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/edit"
+                                element={
+                                    <Edit
+                                        words={words}
+                                        setWords={setWords}
+                                        editWord={invokeEditModal}
+                                        createCategory={
+                                            invokeCreateCategoryModal
+                                        }
+                                        categories={categories}
+                                    />
+                                }
+                            />
+                        </Routes>
+                    </Context.Provider>
+                </div>
+                <GlobalStyle />
+            </ThemeProvider>
         </>
     );
 }

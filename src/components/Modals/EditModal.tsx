@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import { Category, Word } from "../../type";
 import "./styles.css";
 import Button from "../Button";
+import { StyledModal } from "./StyledModal.styled";
 
 interface Props {
     setModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -57,7 +58,7 @@ const EditModal: React.FC<Props> = ({
     return (
         <>
             <Modal setModal={setModal} />
-            <div className="editModal">
+            <StyledModal>
                 <div className="content">
                     <div>
                         <div className="ddLabel">Коллекция:</div>
@@ -131,7 +132,7 @@ const EditModal: React.FC<Props> = ({
                         <Button>Сохранить</Button>
                     </div>
                 </div>
-            </div>
+            </StyledModal>
         </>
     );
 };

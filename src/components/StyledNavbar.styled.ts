@@ -7,6 +7,8 @@ export const StyledNavbar = styled.div`
     justify-content: center;
     background-color: #e6e6e6;
     margin-bottom: 20px;
+    background-color: ${({ theme }) => theme.navbar};
+    color: ${({ theme }) => theme.color};
     .navbar {
         max-height: 100%;
         width: 100%;
@@ -19,14 +21,33 @@ export const StyledNavbar = styled.div`
             justify-content: center;
             align-items: center;
             font-size: 20px;
-
             padding: 0 10px;
             border-left: 1px solid grey;
             border-right: 1px solid grey;
             transition: 0.5s;
             cursor: pointer;
+
             &:hover {
-                background-color: #d6d6d6;
+                background-color: ${({ theme }) => theme.navbarHover};
+            }
+        }
+
+        .switchIconDiv {
+            height: 45px;
+            width: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-left: 1px solid grey;
+            cursor: pointer;
+
+            .switchIcon {
+                height: 20px;
+                width: 20px;
+            }
+
+            &:hover {
+                background-color: ${({ theme }) => theme.navbarHover};
             }
         }
     }
