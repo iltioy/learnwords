@@ -8,6 +8,8 @@ import Filters from "../components/Filters";
 import { Link } from "react-router-dom";
 import { StyledHome } from "./styles/HomeStyled.styled";
 
+const windowInnetWidth = window.innerWidth;
+
 const Home = () => {
     const { words } = useContext(Context);
     const [counter, setCounter] = useState<number>(0);
@@ -181,12 +183,20 @@ const Home = () => {
                             setFilteredWords={setFilteredWords}
                         />
                     </div>
-                    <div className="outlineDiv">
+                    <div
+                        className={`outlineDiv ${
+                            windowInnetWidth < 920 ? "hidden" : ""
+                        }`}
+                    >
                         <Link to="/add" className="settingsLink">
                             Добавить слово
                         </Link>
                     </div>
-                    <div className="outlineDiv">
+                    <div
+                        className={`outlineDiv ${
+                            windowInnetWidth < 920 ? "hidden" : ""
+                        }`}
+                    >
                         <Link to="/edit" className="settingsLink">
                             Редактировать слова
                         </Link>

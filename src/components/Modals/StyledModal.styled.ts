@@ -80,4 +80,19 @@ export const StyledModal = styled.div`
     .createCategoryButton {
         margin-top: 5px;
     }
+
+    .downloadButtons {
+        margin-top: auto;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: row;
+
+        .getButton {
+            margin-left: 40px;
+        }
+    }
+
+    .downloadInput {
+        margin-top: 15px;
+    }
 `;

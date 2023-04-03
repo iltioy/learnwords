@@ -8,6 +8,7 @@ interface Props {
     bg?: string;
     color?: string;
     className?: string;
+    onClick?: () => any;
 }
 
 const Button: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const Button: React.FC<Props> = ({
     bg,
     color,
     className,
+    onClick,
 }) => {
     return (
         <StyledButton
@@ -26,6 +28,7 @@ const Button: React.FC<Props> = ({
             bg={bg}
             color={color}
             className={`${className ? className : ""}`}
+            onClick={onClick}
         >
             <button type={type ? type : "button"}>{children}</button>
         </StyledButton>

@@ -8,9 +8,10 @@ import { themes } from "../defaultTheme";
 interface Props {
     theme: Theme;
     setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+    setIsDownloadModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Navbar: React.FC<Props> = ({ theme, setTheme }) => {
+const Navbar: React.FC<Props> = ({ theme, setTheme, setIsDownloadModal }) => {
     const navigate: NavigateFunction = useNavigate();
     return (
         <StyledNavbar>
@@ -18,9 +19,18 @@ const Navbar: React.FC<Props> = ({ theme, setTheme }) => {
                 <div className="logo noselect" onClick={() => navigate("/")}>
                     Learner
                 </div>
+
                 <div
                     className="item"
                     style={{ marginLeft: "auto" }}
+                    onClick={() => setIsDownloadModal(true)}
+                >
+                    Загрузить
+                </div>
+
+                <div
+                    className="item"
+                    style={{ borderLeft: "none" }}
                     onClick={() => navigate("/edit")}
                 >
                     Редактировать
@@ -39,6 +49,7 @@ const Navbar: React.FC<Props> = ({ theme, setTheme }) => {
                             className="switchIcon"
                             onClick={() => {
                                 setTheme(themes.dark);
+                                localStorage.setItem("theme", "dark");
                             }}
                         />
                     </div>
@@ -48,6 +59,7 @@ const Navbar: React.FC<Props> = ({ theme, setTheme }) => {
                             className="switchIcon"
                             onClick={() => {
                                 setTheme(themes.light);
+                                localStorage.setItem("theme", "light");
                             }}
                         />
                     </div>

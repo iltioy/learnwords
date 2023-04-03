@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Add from "./pages/Add";
 import Edit from "./pages/Edit";
 import EditModal from "./components/Modals/EditModal";
+import DownloadModal from "./components/Modals/DownloadModal";
 import { Word } from "./type";
 import CreateCategoryModal from "./components/Modals/CreateCategoryModal";
 import { Context } from "./Context";
@@ -28,9 +29,16 @@ let editWord: Word = {
 
 let createCategory = "";
 
+let themeName = localStorage.getItem("theme")!;
+let starterTheme: Theme = themes.dark;
+
+if (themeName === "light") {
+    starterTheme = themes.light;
+}
+
 function App() {
     // theme
-    const [theme, setTheme] = useState<Theme>(themes.dark);
+    const [theme, setTheme] = useState<Theme>(starterTheme);
 
     // words + collections
     const [words, setWords] = useState<Word[]>(
@@ -55,6 +63,7 @@ function App() {
 
     // modals
     const [isEditModal, setIsEditModal] = useState<boolean>(false);
+    const [isDownloadModal, setIsDownloadModal] = useState<boolean>(false);
     const [isCreateCategoryModal, setIsCreateCatygoryModal] =
         useState<boolean>(false);
 
@@ -88,6 +97,16 @@ function App() {
                     />
                 )}
 
+                {isDownloadModal && (
+                    <DownloadModal
+                        setModal={setIsDownloadModal}
+                        categories={categories}
+                        setCategories={setCategories}
+                        words={words}
+                        setWords={setWords}
+                    />
+                )}
+
                 {isCreateCategoryModal && (
                     <CreateCategoryModal
                         setModal={setIsCreateCatygoryModal}
@@ -96,7 +115,11 @@ function App() {
                     />
                 )}
 
-                <Navbar theme={theme} setTheme={setTheme} />
+                <Navbar
+                    theme={theme}
+                    setTheme={setTheme}
+                    setIsDownloadModal={setIsDownloadModal}
+                />
                 <div className="container">
                     <Context.Provider
                         value={{ invokeCreateCategoryModal, words, categories }}
