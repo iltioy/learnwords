@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
-export const StyledModal = styled.div`
+interface Props {
+    height?: string;
+}
+
+export const StyledModal = styled.div<Props>`
     position: fixed;
-    height: 400px;
+    height: ${({ height }) => (height ? height : "400px")};
     width: 400px;
     top: 50%;
     left: 50%;
@@ -29,11 +33,69 @@ export const StyledModal = styled.div`
 
     .content {
         display: flex;
-
         flex-direction: column;
         gap: 8px;
         width: 300px;
         height: 350px;
+        overflow: auto;
+    }
+
+    .downloadContent {
+        width: 325px;
+        border-radius: 5px;
+        background-color: #1a1919;
+    }
+
+    .content::-webkit-scrollbar {
+        display: none;
+    }
+
+    .preshow {
+        width: 100%;
+    }
+
+    .saveDownloadButtons {
+        display: flex;
+        flex-direction: row;
+        width: 325px;
+        padding: 20px 0;
+
+        .cancelButton {
+            margin-left: 30px;
+        }
+    }
+
+    .dowanloadTitle {
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        cursor: pointer;
+
+        font-weight: 500;
+    }
+
+    .listItems {
+        padding: 0 10px;
+    }
+
+    .downloadItem {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        overflow: hidden;
+        padding: 3px 0 3px 5px;
+
+        .firstWord {
+            width: 50%;
+            overflow: hidden;
+        }
+
+        .secondWord {
+            margin-left: 10px;
+            width: 45%;
+            overflow: hidden;
+        }
     }
 
     .ddLabel {
@@ -63,17 +125,9 @@ export const StyledModal = styled.div`
         margin-top: 6px;
     }
 
-    .content {
-        display: flex;
-
-        flex-direction: column;
-        gap: 8px;
-        width: 300px;
-        height: 350px;
-    }
-
     .categoryEdit {
         font-size: 20px;
+        font-weight: 100;
         margin-top: 7px;
     }
 
