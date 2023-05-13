@@ -11,6 +11,8 @@ interface Props {
     setIsDownloadModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+const windowInnetWidth = window.innerWidth;
+
 const Navbar: React.FC<Props> = ({ theme, setTheme, setIsDownloadModal }) => {
     const navigate: NavigateFunction = useNavigate();
     return (
@@ -29,14 +31,14 @@ const Navbar: React.FC<Props> = ({ theme, setTheme, setIsDownloadModal }) => {
                 </div>
 
                 <div
-                    className="item"
+                    className={`item ${windowInnetWidth < 920 ? "hidden" : ""}`}
                     style={{ borderLeft: "none" }}
                     onClick={() => navigate("/edit")}
                 >
                     Редактировать
                 </div>
                 <div
-                    className="item"
+                    className={`item ${windowInnetWidth < 920 ? "hidden" : ""}`}
                     style={{ borderLeft: "none", borderRight: "none" }}
                     onClick={() => navigate("/add")}
                 >

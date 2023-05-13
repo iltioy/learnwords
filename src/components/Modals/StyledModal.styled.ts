@@ -43,7 +43,7 @@ export const StyledModal = styled.div<Props>`
     .downloadContent {
         width: 325px;
         border-radius: 5px;
-        background-color: #1a1919;
+        background-color: ${({ theme }) => theme.background};
     }
 
     .content::-webkit-scrollbar {

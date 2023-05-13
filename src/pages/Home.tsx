@@ -185,7 +185,7 @@ const Home = () => {
                     </div>
                     <div
                         className={`outlineDiv ${
-                            windowInnetWidth < 920 ? "hidden" : ""
+                            windowInnetWidth < 920 ? "" : ""
                         }`}
                     >
                         <Link to="/add" className="settingsLink">
@@ -194,7 +194,7 @@ const Home = () => {
                     </div>
                     <div
                         className={`outlineDiv ${
-                            windowInnetWidth < 920 ? "hidden" : ""
+                            windowInnetWidth < 920 ? "" : ""
                         }`}
                     >
                         <Link to="/edit" className="settingsLink">

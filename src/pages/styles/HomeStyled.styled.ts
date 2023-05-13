@@ -7,6 +7,7 @@ export const StyledHome = styled.div`
     row-gap: 20px;
     align-items: center;
     align-items: start;
+    max-width: 100%;
 
     @media (max-width: 920px) {
         grid-template-columns: 1fr;
@@ -39,7 +40,6 @@ export const StyledHome = styled.div`
     }
 
     .mainLearner {
-        width: 100%;
         height: 100%;
 
         display: flex;
@@ -47,12 +47,18 @@ export const StyledHome = styled.div`
 
         @media (max-width: 1000px) {
             justify-content: center;
+            width: 95%;
+            margin: 0 auto;
         }
     }
 
     .mainButtons {
         height: 100%;
-        width: 100%;
+
+        @media (max-width: 1000px) {
+            width: 95%;
+            margin: 0 auto;
+        }
 
         display: flex;
         justify-content: center;
@@ -60,7 +66,8 @@ export const StyledHome = styled.div`
         .mainButtonsInner {
             width: 100%;
             @media (max-width: 1000px) {
-                width: 430px;
+                max-width: 100%;
+                width: 100%;
             }
         }
     }
@@ -70,6 +77,7 @@ export const StyledHome = styled.div`
         border-radius: 5px;
         padding: 10px;
         width: 400px;
+        max-width: 100%;
         height: 400px;
         display: flex;
         flex-direction: column;
