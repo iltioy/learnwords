@@ -124,7 +124,7 @@ const DownloadModal: React.FC<Props> = ({
         if (profileName !== "") {
             try {
                 const res = await axios.post(
-                    "http://45.12.239.95:5000/api/v1/words/create",
+                    "http://62.113.108.76:5000/api/v1/words/create",
                     {
                         profileName,
                         words,
@@ -143,7 +143,7 @@ const DownloadModal: React.FC<Props> = ({
         if (profileName !== "") {
             try {
                 const res = await axios.get(
-                    `http://45.12.239.95:5000/api/v1/words/get/${profileName}`
+                    `http://62.113.108.76:5000/api/v1/words/get/${profileName}`
                 );
 
                 if (res.data) {
